@@ -269,6 +269,47 @@
 /* responsive */
 @media (max-width:960px){ .gallery.grid3{ grid-template-columns:repeat(2,1fr) } }
 @media (max-width:560px){ .gallery.grid3{ grid-template-columns:1fr } }
+
+/* ===== Mobile polish for .split sections ===== */
+@media (max-width: 768px){
+
+  /* jangan center-align, biar lebar penuh */
+  .split{
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    row-gap: 16px;                 /* jarak antar blok */
+  }
+
+  /* pastikan anak grid bisa melar penuh dan tidak overflow */
+  .split > *{
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* urutan: teks dulu baru gambar (lebih enak dibaca) */
+  /* berlakunya untuk section home & product yang pakai .split */
+  #home .text-card{ order: 1; }
+  #home img{ order: 2; }
+  #product .panel{ order: 1; }
+  #product img{ order: 2; }
+
+  /* padding & tipografi lebih ramah layar kecil */
+  section{ padding: 48px 0 !important; }
+  .text-card, .panel, .card{ padding: 18px !important; }
+  .muted{ font-size: 15px; line-height: 1.8; }
+
+  /* gambar jangan “nyempil”, selalu block penuh */
+  img{ width:100% !important; height:auto !important; display:block !important; }
+
+  /* grid galeri: 2 kolom di hp sedang, 1 kolom di hp kecil sudah ada; tambahkan sedikit gap */
+  .gallery.grid3{ gap: 14px !important; }
+}
+
+/* Safety: di semua ukuran, hindari perilaku “nyempil” */
+.split{ align-items: start; }
+.split > *{ min-width: 0; }
+
 </style>
 
 </head>
