@@ -309,6 +309,46 @@
 /* Safety: di semua ukuran, hindari perilaku “nyempil” */
 .split{ align-items: start; }
 .split > *{ min-width: 0; }
+/* Samain ukuran gambar di section Product */
+#product .grid3 .item img {
+  width: 100%;
+  height: 260px;              /* tinggi seragam */
+  object-fit: cover;          /* potong gambar biar proporsional */
+  border-radius: 10px;        /* biar sudutnya halus */
+  display: block;
+}
+/* Efek zoom halus di semua gambar */
+img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Saat hover, sedikit zoom dan naikkan bayangan */
+img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+/* Tombol: animasi lebih lembut dan natural */
+button {
+ /* Semua properti yang berubah harus ada di transisi */
+ transition:
+transform 0.5s ease-out, 
+box-shadow 0.5s ease-out,
+filter 0.3s ease; /* Filter bisa sedikit lebih cepat */
+}
+
+/* Hover: sedikit naik, membesar lembut, shadow lembut */
+button:hover {
+ transform: translateY(-6px) scale(1.05);
+ box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+ filter: brightness(1.07); /* <-- Efek ini sekarang dianimasikan */
+}
+
+/* Saat ditekan: turun sedikit biar realistik */
+button:active {
+ transform: translateY(-2px) scale(0.98);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+ filter: brightness(0.96); /* <-- Efek ini sekarang dianimasikan */
+}
 
 </style>
 
@@ -350,7 +390,44 @@
       </div>
     </div>
   </section>
-
+  
+  
+   <!-- Product -->
+  <section id="product" class="beige-section">
+    <div class="wrap">
+      <div class="section-title">Product</div>
+      <div class="grid3">
+        <!-- Face Care -->
+        <div class="item" style="background:var(--sand); padding:16px;">
+          <img src="assets/gambar13.jpg" alt="Face Care">
+          <h3 style="margin-top:10px; font-weight:700; color:var(--olive);">Face Care</h3>
+          <p class="muted" style="font-size:15px;">
+            Facial Foam, Hydrating Toner, Moisturizer, Face Oil, Gel Serum,  
+            Powder Mask, Clay Mask, Jelly Mask, Exfoliating Mask, Sleeping Mask
+          </p>
+        </div>
+  
+        <!-- Hair Care -->
+        <div class="item" style="background:var(--sand); padding:16px;">
+          <img src="assets/gambar12.jpg" alt="Hair Care">
+          <h3 style="margin-top:10px; font-weight:700; color:var(--olive);">Hair Care</h3>
+          <p class="muted" style="font-size:15px;">
+            Shampoo, Conditioner, Hair Mist, Hair Serum, Hair Mask, Head-to-Toe Wash
+          </p>
+        </div>
+  
+        <!-- Lip Care & Cosmetic -->
+        <div class="item" style="background:var(--sand); padding:16px;">
+          <img src="assets/gambar15.jpg" alt="Lip Care & Cosmetic">
+          <h3 style="margin-top:10px; font-weight:700; color:var(--olive);">Lip Care & Cosmetic</h3>
+          <p class="muted" style="font-size:15px;">
+            Pandan Lip Balm, Lip Scrub, Lip Mask, Tinted Lip Balm, Lip Oil,  
+            Hydrating Lip Tint, Lipstick
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- Portfolio part of Home -->
   <section id="class" class="beige-section">
     <div class="wrap">
@@ -363,24 +440,6 @@
     </div>
   </section>
 
-  <!-- Product & Class -->
-  <section id="product" class="beige-section">
-    <div class="wrap split">
-      <div><img src="assets/gambar12.jpg" alt="Product"></div>
-     <div class="panel has-rule">
-  <h2>Product & Class</h2>
-  <div class="content">
-    <p>Lorem ipsum dolor sit amet…</p>
-    <ul>
-      <li>Lorem ipsum dolor sit amet</li>
-      <li>Consectetur adipiscing elit</li>
-      <li>Sed do eiusmod tempor incididunt</li>
-    </ul>
-  </div>
-</div>
-
-    </div>
-  </section>
 
   <!-- About -->
   <section id="about" class="beige-section">
@@ -403,7 +462,7 @@
     <div class="contact">
       <!-- Tombol WhatsApp -->
       <div class="card" style="display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center">
-        <p class="muted" style="margin-bottom:16px;font-size:16px;">Hubungi kami langsung melalui WhatsApp</p>
+        <p class="muted" style="margin-bottom:16px;font-size:16px;">Hubungi kami langsung melalui WhatsApp!</p>
       <a href="https://wa.me/6282132626756" target="_blank" style="text-decoration:none;">
   <button
     style="display:flex;align-items:center;justify-content:center;gap:10px;
