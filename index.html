@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <style>
    /* ====== FONTS ====== */
   @font-face{
@@ -63,18 +66,36 @@
     font-weight:400; font-size:22px; text-align:center;
     letter-spacing:.5px; color:var(--olive);
   }
-  .menu-toggle{
-    position:absolute;right:0;top:50%;transform:translateY(-50%);
-    display:inline-flex;align-items:center;justify-content:center;
-    width:40px;height:40px;color:var(--olive);
-    border:1px solid rgba(0,0,0,.12);background:#fff;border-radius:10px;
-    font-size:0;cursor:pointer;line-height:1;
-  }
-  .menu-toggle .icon{display:block}
-  .menu-toggle .icon-close{display:none}
-  .menu-toggle[aria-expanded="true"] .icon-hamburger{display:none}
-  .menu-toggle[aria-expanded="true"] .icon-close{display:block}
-  .menu-toggle:focus-visible{outline:2px dashed #888;outline-offset:4px}
+ /* — Menu toggle: base — */
+.menu-toggle{
+  /* display:none; Hapus atau abaikan ini di base, akan diatur di media query */
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  align-items:center; justify-content:center;
+  width:40px; height:40px; color:var(--olive);
+  border:1px solid rgba(0,0,0,.12); background:#fff; border-radius:10px;
+  cursor:pointer; line-height:1;
+  /* Atur agar tersembunyi by default, akan di-override di mobile media query */
+  display: none; 
+}
+
+/* Pastikan SVG (hasil generate Feather) terlihat dan diberi gaya */
+/* Pastikan Feather icon kelihatan */
+.menu-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;     /* ← Feather pakai stroke, bukan fill */
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+}
+
+/* toggle ikon X vs hamburger */
+.menu-toggle .icon{display:block}
+.menu-toggle .icon-close{display:none}
+.menu-toggle[aria-expanded="true"] .icon-hamburger{display:none}
+.menu-toggle[aria-expanded="true"] .icon-close{display:block}
 
   /* Link nav (desktop) */
   nav{display:flex;gap:28px;justify-content:center}
@@ -114,7 +135,24 @@
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:18px}
   .grid3 .item{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
   .grid3 .item img{border-radius:0}
-  .section-title{font-weight:600;text-align:center;margin-bottom:10px;color:var(--olive)}
+  /* --- Title utilities --- */
+.section-title{
+  font-weight:700;                    /* lebih tebal */
+  font-size:clamp(24px,3.2vw,36px);   /* lebih besar */
+  text-align:center;
+  color:var(--olive);
+  margin-bottom:14px;
+}
+
+/* judul section generik biar gampang reuse */
+.section-heading{
+  font-family:Elegist, "Times New Roman", serif;
+  font-weight:700;
+  font-size:clamp(24px,3.2vw,36px);
+  text-align:center;
+  color:var(--olive);
+  margin:0 0 14px;
+}
 
   /* panel / section beige */
   .beige-section{
@@ -148,18 +186,28 @@
   }
 
   /* ====== Responsive ====== */
-  @media (min-width:769px){ .menu-toggle{display:none} }
-  @media (max-width:960px){
-    .split{grid-template-columns:1fr}
-    .contact{grid-template-columns:1fr}
-  }
-  @media (max-width:768px){
-    nav{display:none;flex-direction:column;gap:12px;align-items:flex-start}
-    nav.open{display:flex}
-    .topbar{gap:8px;padding:10px 0}
-    nav a{padding:10px 2px}
-    .wrap{padding:0 16px}
-  }
+ /* ====== Responsive: Desktop ====== */
+/* Tampilkan tombol juga di desktop (kalau mau terlihat di desktop) */
+@media (min-width: 769px){
+  .menu-toggle{ display:none; }
+}
+
+/* ====== Responsive: Mobile/Tablet ====== */
+@media (max-width:768px){
+  /* Di Mobile/Tablet, tampilkan tombol toggle */
+  /* inline-flex cocok karena .menu-toggle ada di dalam flex container (.brand-row) */
+  .menu-toggle{display:inline-flex}
+
+  /* Navigasi utama disembunyikan secara default */
+  nav{display:none; flex-direction:column; gap:12px; align-items:flex-start}
+  /* Saat aria-expanded="true" (melalui JS), tampilkan nav */
+  nav.open{display:flex}
+
+  /* Penyesuaian tata letak kecil di mobile */
+  .topbar{gap:8px; padding:10px 0}
+  nav a{padding:10px 2px}
+  .wrap{padding:0 16px}
+}
   /* ——— Typography rhythm inside panels/cards ——— */
 .panel, .card {
   padding: 28px 28px;             /* padding seragam */
@@ -206,6 +254,21 @@
   content: ""; display: block; height: 1px; width: 64px;
   background: rgba(0,0,0,.12); margin-top: 10px;
 }
+
+/* ==== Review / Gallery ==== */
+.gallery.grid3{ grid-template-columns:repeat(3,1fr); gap:22px }
+.gallery .item{
+  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:12px;
+  overflow:hidden; box-shadow:var(--shadow); aspect-ratio:4/3;
+}
+.gallery .item img{
+  width:100%; height:100%; object-fit:cover; display:block; transition:transform .28s ease;
+}
+.gallery .item:hover img{ transform:scale(1.03) }
+
+/* responsive */
+@media (max-width:960px){ .gallery.grid3{ grid-template-columns:repeat(2,1fr) } }
+@media (max-width:560px){ .gallery.grid3{ grid-template-columns:1fr } }
 </style>
 
 </head>
@@ -214,18 +277,11 @@
   <div class="wrap topbar">
     <div class="brand-row">
       <div class="brand">Latree Makers</div>
-      <button class="menu-toggle" aria-label="Buka/Tutup Menu" aria-expanded="false">
-  <!-- Icon hamburger -->
-  <svg class="icon icon-hamburger" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="6"  width="18" height="2" rx="1"></rect>
-    <rect x="3" y="11" width="18" height="2" rx="1"></rect>
-    <rect x="3" y="16" width="18" height="2" rx="1"></rect>
-  </svg>
-  <!-- Icon close (X) -->
-  <svg class="icon icon-close" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M6 6 L18 18 M18 6 L6 18" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"/>
-  </svg>
+<button class="menu-toggle" aria-label="Buka/Tutup Menu" aria-expanded="false">
+  <i class="bi bi-list icon icon-hamburger" aria-hidden="true"></i>
+  <i class="bi bi-x icon icon-close" aria-hidden="true"></i>
 </button>
+
     </div>
 
     <nav id="mainnav">
@@ -233,6 +289,7 @@
       <a href="#product">Product & Class</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="#reviews">Reviews</a>
     </nav>
   </div>
 </header>
@@ -242,24 +299,25 @@
   <section id="home">
     <div class="wrap split">
       <div>
-        <img src="assets/home.svg" alt="Home">
+        <img src="assets/gambar14.jpg" alt="Home">
       </div>
       <div class="text-card">
         <h2>Selamat Datang di Latree</h2>
-        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida, orci ut tristique volutpat, magna odio aliquam velit, id placerat mauris urna quis est. Duis nec turpis id lacus bibendum faucibus. Pellentesque eu finibus ligula.</p>
-        <p class="muted">Vestibulum non odio ac ante tristique ultrices. Etiam dapibus, ipsum vitae vehicula luctus, nunc urna bibendum metus, sit amet viverra arcu ipsum sit amet lorem.</p>
+        <p class="muted">Kami adalah brand lokal dari Cabang Jawa Timur yang jadi pelopor dalam menghadirkan kelas formulasi produk body care, skin care, face care, hair care, hingga komestik berbahan alami. Semua produk kami aman untuk semua usia- mulai dari bayi, remaja, sampai dewasa. Dan yang paling penting harganya tetap ramah di kantong, tanpa mengorbankan kualitas.</p>
+        <p class="muted">Kami percaya setiap orang berhak tahu dam paham tentang apa yang mereka pakai di kulit. Karena itu, Latree juga menghadirkan kelas-kelas seru buat kamu yang ingin belajar lebih dalam soal produk kecantikan dan perawatan tubuh. Cocok untuk pemula, maupun kamu yang sudah punya brand sendiri dan ingin upgrade ilmu. Bisa privat atau bareng-bareng, tinggal pilih yang paling nyaman!</p>
+      
       </div>
     </div>
   </section>
 
   <!-- Portfolio part of Home -->
-  <section class="beige-section">
+  <section id="class" class="beige-section">
     <div class="wrap">
-      <div class="section-title">Portfolio</div>
+      <div class="section-title">Class</div>
       <div class="grid3">
-        <div class="item"><img src="assets/portfolio1.svg" alt="Portfolio 1"></div>
-        <div class="item"><img src="assets/portfolio2.svg" alt="Portfolio 2"></div>
-        <div class="item"><img src="assets/portfolio3.svg" alt="Portfolio 3"></div>
+        <div class="item"><img src="assets/gambar6.jpg" alt="Portfolio 1"></div>
+        <div class="item"><img src="assets/gambar8.jpg" alt="Portfolio 2"></div>
+        <div class="item"><img src="assets/gambar9.jpg" alt="Portfolio 3"></div>
       </div>
     </div>
   </section>
@@ -267,7 +325,7 @@
   <!-- Product & Class -->
   <section id="product" class="beige-section">
     <div class="wrap split">
-      <div><img src="assets/product.svg" alt="Product"></div>
+      <div><img src="assets/gambar12.jpg" alt="Product"></div>
      <div class="panel has-rule">
   <h2>Product & Class</h2>
   <div class="content">
@@ -286,7 +344,7 @@
   <!-- About -->
   <section id="about" class="beige-section">
     <div class="wrap split">
-      <div><img src="assets/about.svg" alt="About"></div>
+      <div><img src="assets/gambar16.jpg" alt="About"></div>
       <div class="panel has-rule">
   <h2>About</h2>
   <div class="content">
@@ -300,7 +358,7 @@
 <!-- Contact -->
 <section id="contact" class="beige-section">
   <div class="wrap">
-    <h2 style="margin-bottom:10px">Contact</h2>
+    <h2 class="section-heading">Contact</h2>
     <div class="contact">
       <!-- Tombol WhatsApp -->
       <div class="card" style="display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center">
@@ -333,6 +391,36 @@
   </div>
 </section>
 
+<!-- Reviews -->
+<section id="reviews" class="beige-section">
+  <div class="wrap">
+    <div class="section-title">Review Kami</div>
+
+    <div class="gallery grid3">
+      <!-- Row 1 -->
+      <div class="item">
+        <img src="assets/reviews/rev1.jpg" alt="Review pelanggan 1" loading="lazy">
+      </div>
+      <div class="item">
+        <img src="assets/reviews/rev2.jpg" alt="Review pelanggan 2" loading="lazy">
+      </div>
+      <div class="item">
+        <img src="assets/reviews/rev3.jpg" alt="Review pelanggan 3" loading="lazy">
+      </div>
+
+      <!-- Row 2 -->
+      <div class="item">
+        <img src="assets/reviews/rev4.jpg" alt="Review pelanggan 4" loading="lazy">
+      </div>
+      <div class="item">
+        <img src="assets/reviews/rev5.jpg" alt="Review pelanggan 5" loading="lazy">
+      </div>
+      <div class="item">
+        <img src="assets/reviews/rev6.jpg" alt="Review pelanggan 6" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
 
 </main>
 
@@ -340,59 +428,71 @@
   <div class="wrap">© 2025 Latree Makers — Placeholder</div>
 </footer>
 <script>
-// ====== Toggle menu (untuk tampilan HP) ======
-const toggleBtn = document.querySelector('.menu-toggle');
-const nav = document.getElementById('mainnav');
+  // ====== Toggle menu (tetap) ======
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const nav = document.getElementById('mainnav');
+  if (toggleBtn && nav) {
+    const toggle = () => {
+      const isOpen = nav.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+    toggleBtn.addEventListener('click', toggle);
+    toggleBtn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  }
 
-if (toggleBtn && nav) {
-  const toggle = () => {
-    const isOpen = nav.classList.toggle('open');
-    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  // ====== Highlight navbar aktif saat scroll ======
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section[id]');
+
+  // Map beberapa section ke link yang sama (#product)
+  const sectionMap = {
+    "class": "product",   // saat di section #class → aktifkan link #product
+    "product": "product",
+    "about": "about",
+    "contact": "contact",
+    "reviews": "reviews",
+    "home": "home"
   };
-  toggleBtn.addEventListener('click', toggle);
-  // bonus: dukung keyboard (Enter/Space)
-  toggleBtn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-  });
-}
 
-// ====== Highlight navbar aktif saat scroll ======
-const navLinks = document.querySelectorAll('nav a');
-const sections = document.querySelectorAll('section[id]');
+  function updateActiveLink() {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
 
-function updateActiveLink() {
-  let current = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 120; // sedikit lebih tinggi biar pas
-    const sectionHeight = section.clientHeight;
-    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-      current = section.getAttribute('id');
-    }
-  });
+    const mapped = sectionMap[current] || current;
 
-  // ubah active state
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href') || '';
+      if (href === `#${mapped}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink);
+  window.addEventListener('load', updateActiveLink);
+
+  // Tutup menu otomatis setelah klik link (mobile)
   navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === `#${current}`) {
-      link.classList.add('active');
-    }
+    link.addEventListener('click', e => {
+      navLinks.forEach(x => x.classList.remove('active'));
+      e.target.classList.add('active');
+      if (nav.classList.contains('open')) nav.classList.remove('open');
+    });
   });
-}
+</script>
 
-// jalankan saat load & scroll
-window.addEventListener('scroll', updateActiveLink);
-window.addEventListener('load', updateActiveLink);
-
-// ====== Tutup menu otomatis setelah klik link di HP ======
-navLinks.forEach(link => {
-  link.addEventListener('click', e => {
-    navLinks.forEach(x => x.classList.remove('active'));
-    e.target.classList.add('active');
-    if (nav.classList.contains('open')) {
-      nav.classList.remove('open');
-    }
-  });
-});
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+  feather.replace(); // ini HARUS dipanggil setelah tombolnya ada di DOM
 </script>
 
 </body>
