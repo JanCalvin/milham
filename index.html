@@ -416,6 +416,74 @@ main img:hover{
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+/* === Price Table === */
+.price-table-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.price-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.2);
+  font-size: 16px;
+}
+
+.price-table th,
+.price-table td {
+  border: 1px solid rgba(0,0,0,.2);
+  padding: 14px 18px;
+  text-align: center;
+}
+
+.price-table th {
+  background: var(--sand);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--olive);
+}
+
+/* === Package Cards === */
+.package-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;   /* <-- bikin baris terakhir CENTER */
+  align-items: stretch;
+  margin-top: 20px;
+}
+
+.pkg-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 300px;               /* <-- ukuran konsisten */
+  max-width: 100%;
+}
+
+
+.pkg-card h3 {
+  margin-top: 0;
+  color: var(--olive);
+  font-family: Elegist;
+  text-align: center;
+}
+
+.pkg-card ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.pkg-card li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
 
 </style>
 </head>
@@ -440,7 +508,8 @@ main img:hover{
 
     <nav id="mainnav">
       <a href="#home" class="active">Home</a>
-      <a href="#product">Product & Class</a>
+      <a href="#product">Product</a>
+      <a href="#class"> Class</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
       <a href="#reviews">Reviews</a>
@@ -518,18 +587,18 @@ main img:hover{
   </div>
 </section>
 
-
 <!-- Class -->
 <section id="class" class="beige-section">
   <div class="wrap">
+
     <div class="section-title">Class</div>
 
     <!-- Deskripsi besar -->
-    <div class="text-card" style="text-align:center; margin-bottom:16px;">
+    <div class="text-card" style="text-align:center; margin-bottom:24px;">
       <p class="muted" style="font-size:16px; line-height:1.9; margin:0;">
         Ingin bisa bikin produk kecantikan dan perawatan tubuh sendiri? Yuk, ikuti kelas eksklusif di Latree!
-        Dipandu oleh instruktur berpengalaman, kamu akan belajar langsung cara membuat produk dari bahan alami dan
-        aman, sesuai standar kualitas Latree. Bisa untuk pemakaian pribadi atau bekal memulai bisnis!
+        Dipandu oleh instruktur berpengalaman, kamu akan belajar langsung cara membuat produk dari bahan alami dan aman,
+        sesuai standar kualitas Latree. Bisa untuk pemakaian pribadi atau bekal memulai bisnis!
       </p>
     </div>
 
@@ -539,8 +608,93 @@ main img:hover{
       <div class="item"><img src="assets/gambar8.jpg" alt="Kelas Praktek Bahan Alami" loading="lazy"></div>
       <div class="item"><img src="assets/gambar9.jpg" alt="Kelas Packaging & QC" loading="lazy"></div>
     </div>
+
+    <!-- PRICE LIST -->
+    <h2 style="text-align:center; margin-top:40px; color:var(--olive); font-family:Elegist;">Price List</h2>
+
+    <div class="price-table-wrapper">
+      <table class="price-table">
+        <tr>
+          <th>Paket</th>
+          <th>Harga</th>
+        </tr>
+        <tr>
+          <td>Paket A</td>
+          <td>Rp 1.350.000</td>
+        </tr>
+        <tr>
+          <td>Paket B</td>
+          <td>Rp 1.600.000</td>
+        </tr>
+        <tr>
+          <td>Paket C</td>
+          <td>Rp 1.750.000</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- PACKAGE CARDS -->
+    <h2 style="text-align:center; margin-top:40px; color:var(--olive); font-family:Elegist;">
+      Class Packages
+    </h2>
+
+    <div class="package-grid">
+
+      <!-- FACE -->
+      <div class="pkg-card">
+        <h3>🌿 Face Care Package</h3>
+        <ul>
+          <li><strong>Paket A:</strong> Facial Foam, Hydrating Toner, Face Moisturizer</li>
+          <li><strong>Paket B:</strong> Facial Foam, Hydrating Toner, Face Moisturizer, Facial Oil</li>
+          <li><strong>Paket C:</strong> Facial Foam, Hydrating Toner, Face Moisturizer, Gel Serum</li>
+        </ul>
+      </div>
+
+      <!-- BODY -->
+      <div class="pkg-card">
+        <h3>🧴 Body Care Package</h3>
+        <ul>
+          <li><strong>Paket A:</strong> Body Wash, Body Lotion, Body Oil</li>
+          <li><strong>Paket B:</strong> Body Wash, Body Lotion, Body Oil, Body Scrub</li>
+          <li><strong>Paket C:</strong> Body Wash, Body Lotion, Body Oil, Body Scrub, Body Butter</li>
+        </ul>
+      </div>
+
+      <!-- HAIR -->
+      <div class="pkg-card">
+        <h3>💇 Hair Care Package</h3>
+        <ul>
+          <li><strong>Paket A:</strong> Shampoo, Hair Mist, Hair Serum</li>
+          <li><strong>Paket B:</strong> Shampoo, Hair Mist, Hair Serum, Conditioner</li>
+          <li><strong>Paket C:</strong> Shampoo, Hair Mist, Hair Serum, Conditioner, Hair Mask</li>
+        </ul>
+      </div>
+
+      <!-- LIP -->
+      <div class="pkg-card">
+        <h3>💄 Lip Care Package</h3>
+        <ul>
+          <li><strong>Paket A:</strong> Pandan Lip Balm, Lip Scrub, Lip Mask</li>
+          <li><strong>Paket B:</strong> Pandan Lip Balm, Lip Scrub, Lip Mask, Tinted Lip Balm</li>
+          <li><strong>Paket C:</strong> Pandan Lip Balm, Lip Scrub, Lip Mask, Tinted Lip Balm, Lip Oil</li>
+        </ul>
+      </div>
+
+      <!-- MASK -->
+      <div class="pkg-card">
+        <h3>🧪 Mask Package</h3>
+        <ul>
+          <li><strong>Paket A:</strong> Powder Mask, Clay Mask, Jelly Mask</li>
+          <li><strong>Paket B:</strong> Powder Mask, Clay Mask, Jelly Mask, Exfoliating Mask</li>
+          <li><strong>Paket C:</strong> Powder Mask, Clay Mask, Jelly Mask, Exfoliating Mask, Sleeping Mask</li>
+        </ul>
+      </div>
+
+    </div> <!-- END PACKAGE GRID -->
+
   </div>
 </section>
+
 
 
   <!-- About -->
@@ -644,7 +798,7 @@ main img:hover{
   // Active link on scroll (map #class ke #product)
   const navLinks = document.querySelectorAll('nav a');
   const sections = document.querySelectorAll('section[id]');
-  const sectionMap = { "class":"product","product":"product","about":"about","contact":"contact","reviews":"reviews","home":"home" };
+  const sectionMap = { "class":"class","product":"product","about":"about","contact":"contact","reviews":"reviews","home":"home" };
 
   function updateActiveLink(){
     let current = '';
