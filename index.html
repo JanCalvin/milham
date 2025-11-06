@@ -484,6 +484,18 @@ main img:hover{
   margin-bottom: 6px;
   line-height: 1.5;
 }
+.ig-btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:10px 16px;
+  background:linear-gradient(45deg,#F58529,#FEDA77,#DD2A7B,#8134AF,#515BD4);
+  color:#fff !important;
+  border-radius:10px;
+  font-weight:600; font-size:15px;
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
+  transition:.25s ease;
+}
+.ig-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.2); }
+.ig-btn svg{ width:18px; height:18px; }
 
 </style>
 </head>
@@ -713,10 +725,12 @@ main img:hover{
   <!-- Contact -->
   <section id="contact" class="beige-section">
     <div class="wrap">
-      <h2 class="section-heading">Contact</h2>
+      
       <div class="contact">
+        
         <!-- Kartu WhatsApp -->
         <div class="wa-card">
+<h2 class="section-heading">Contact</h2>
           <p class="muted" style="font-size:16px;margin:0">Hubungi kami langsung melalui WhatsApp!</p>
         
           <a href="https://wa.me/6281367151026" target="_blank" style="text-decoration:none;">
@@ -730,26 +744,34 @@ main img:hover{
     <span>Contact Me!</span>
 </button>
           </a>
+          <p class="muted" style="margin-top:12px;">Phone: +62 813-6715-1026 (Admin)</p>
         </div>
 
         <!-- Info kanan -->
-        <div class="card">
-          <h3>Contact & Location</h3>
-           <p class="muted"> 
+       <div class="card">
+  <h3>Location & Social Media</h3>
+  <p class="muted">
+    Perum Jl. Taman Indah Soekarno Hatta No.Kav. 44,<br>
+    Mojolangu, Kec. Lowokwaru, Kota Malang, Jawa Timur 65142
+  </p>
 
-            Perum Jl. Taman Indah Soekarno Hatta No.Kav. 44,<br>
-             Mojolangu, Kec. Lowokwaru, Kota Malang, Jawa Timur 65142
-         </p> 
-         <div style="text-align:center;">
-           <a href="https://maps.app.goo.gl/3CYhg7spcVTrW3yS7?g_st=ac" target="_blank" class="location-btn">
-             📍 Lihat Lokasi di Google Maps
-            </a>
-         </div>
-         
-            
-          <p class="muted">Phone: +62 813-6715-1026 (Admin)</p>
-          <p class="muted">Instagram: @latreemakers &amp; @latree.coslab</p>
-        </div>
+  <div style="text-align:center; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://maps.app.goo.gl/3CYhg7spcVTrW3yS7?g_st=ac" target="_blank" class="location-btn" rel="noopener">
+      📍 Lihat Lokasi di Google Maps
+    </a>
+
+    <a href="https://www.instagram.com/latreemakers/" target="_blank" class="ig-btn" aria-label="Buka Instagram Latree Makers" rel="noopener">
+      <!-- Ikon Instagram (SVG) -->
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM18.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </svg>
+      @latreemakers
+    </a>
+  </div>
+
+  
+</div>
+
       </div>
     </div>
   </section>
